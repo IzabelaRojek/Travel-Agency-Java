@@ -3,12 +3,10 @@ package com.kodilla.travelagency.domain;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import javax.persistence.*;
 
 @Getter
-@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -21,15 +19,12 @@ public class Reservation {
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "USER_ID")
-    private Long userId;
+    private User user;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "TRIP_ID")
-    private Long tripId;
+    private Trip trip;
 
     @Column(name = "CONFIRMED")
     private boolean isConfirmed;
-
-    /*@Column
-    private int peopleNumber;*/
 }

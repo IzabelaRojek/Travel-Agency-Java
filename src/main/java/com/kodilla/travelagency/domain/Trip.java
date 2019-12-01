@@ -3,7 +3,6 @@ package com.kodilla.travelagency.domain;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -11,7 +10,6 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Getter
-@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -45,11 +43,12 @@ public class Trip {
 
     @OneToMany(
             targetEntity = Reservation.class,
-            mappedBy = "tripId",
+            mappedBy = "trip",
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY
     )
     private List<Reservation> reservations;
+
 
     public Trip(Long id, String name, String destination, String description, LocalDate startDate, LocalDate stopDate, String type, BigDecimal price) {
         this.id = id;

@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-@Transactional // czy z biblioteki javax??
+@Transactional
 public interface ReservationRepository extends CrudRepository<Reservation, Long> {
 
     @Override
@@ -25,11 +25,8 @@ public interface ReservationRepository extends CrudRepository<Reservation, Long>
     @Override
     void deleteById(Long id);
 
-    Optional<Reservation> findByUser(User user); //
+    Optional<Reservation> findByUser(User user);
 
     Optional<Reservation> findByUser_Id(Long id);
 
-    List<Reservation> findAllByUser_Username(String username);
-
-  //  Optional<List<Reservation>> findAllByUser_Username(String username);  czy coś takiego istnieje???
 }
