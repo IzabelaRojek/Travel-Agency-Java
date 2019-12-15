@@ -30,12 +30,12 @@ public class UserController {
         return userMapper.mapToUserDtoList(userService.getAllUsers());
     }
 
-    @GetMapping("{login}")
+    @GetMapping("getUserByLogin/{login}")
     public UserDto getUserByLogin(@PathVariable String login) throws NotFoundException {
         return userMapper.mapToUserDto(userService.getUser(login).orElseThrow(NotFoundException::new));
     }
 
-    @GetMapping("{id}")
+    @GetMapping("getUser/{id}")
     public UserDto getUserById(@PathVariable Long id) throws NotFoundException {
         return userMapper.mapToUserDto(userService.getUserById(id).orElseThrow(NotFoundException::new));
     }
