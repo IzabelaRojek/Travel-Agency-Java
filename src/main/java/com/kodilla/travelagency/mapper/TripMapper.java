@@ -11,7 +11,8 @@ import java.util.stream.Collectors;
 public class TripMapper {
     public List<TripDto> mapToTripDtoList(final List<Trip> trips) {
         return trips.stream()
-                .map(t -> new TripDto(t.getId(), t.getName(), t.getDestination(), t.getDescription(), t.getStartDate(), t.getStopDate(), t.getType(), t.getPrice()))
+                //.map(t -> new TripDto(t.getId(), t.getName(), t.getDestination(), t.getDescription(), t.getStartDate(), t.getStopDate(), t.getType(), t.getPrice()))
+                .map(t -> mapToTripDto(t))
                 .collect(Collectors.toList());
     }
 

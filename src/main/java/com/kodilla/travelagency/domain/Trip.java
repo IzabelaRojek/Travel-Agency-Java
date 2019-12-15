@@ -1,5 +1,6 @@
 package com.kodilla.travelagency.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,6 +19,7 @@ public class Trip {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(unique = true)
     private Long id;
 
     @Column
@@ -30,13 +32,15 @@ public class Trip {
     private String description;
 
     @Column
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate startDate;
 
     @Column
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate stopDate;
 
     @Column
-    private String type;
+    private TripType type;
 
     @Column
     private BigDecimal price;
@@ -44,13 +48,13 @@ public class Trip {
     @OneToMany(
             targetEntity = Reservation.class,
             mappedBy = "trip",
-            cascade = CascadeType.ALL,
+            cascade = CascadeType.MERGE,
             fetch = FetchType.LAZY
     )
     private List<Reservation> reservations;
 
 
-    public Trip(Long id, String name, String destination, String description, LocalDate startDate, LocalDate stopDate, String type, BigDecimal price) {
+    public Trip(Long id, String name, String destination, String description, LocalDate startDate, LocalDate stopDate, TripType type, BigDecimal price) {
         this.id = id;
         this.name = name;
         this.destination = destination;

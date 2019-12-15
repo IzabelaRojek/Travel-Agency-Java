@@ -15,13 +15,14 @@ public class Reservation {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(unique = true)
     private Long id;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne//(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
     @JoinColumn(name = "USER_ID")
     private User user;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne//(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
     @JoinColumn(name = "TRIP_ID")
     private Trip trip;
 

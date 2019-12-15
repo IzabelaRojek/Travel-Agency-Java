@@ -19,10 +19,13 @@ public interface UserRepository extends CrudRepository<User, Long> {
     User save(User user);
 
     @Override
+    Optional<User> findById(Long id);
+
+    @Override
     void delete(User user);
 
     @Override
-    void deleteById(final Long id);
+    void deleteById(Long id);
 
 
     Optional<User> findByLogin(String login);

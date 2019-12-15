@@ -3,6 +3,7 @@ package com.kodilla.travelagency.domain;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.UniqueElements;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -17,6 +18,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(unique = true)
     private Long id;
 
     @Column
@@ -25,7 +27,7 @@ public class User {
     @Column
     private String lastname;
 
-    @Column
+    @Column//(unique = true)
     @NotNull
     private String login;
 
@@ -39,7 +41,7 @@ public class User {
     @OneToMany(
             targetEntity = Reservation.class,
             mappedBy = "user",
-            cascade = CascadeType.ALL,
+            cascade = CascadeType.MERGE,
             fetch = FetchType.LAZY
     )
     private List<Reservation> reservations;
