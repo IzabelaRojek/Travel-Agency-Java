@@ -55,5 +55,7 @@ public class TripService {
                 .collect(Collectors.toSet());
     }
 
-    //public void deleteTrip();
+    public void deleteTrip(Long id) {
+        tripRepository.deleteById(id);
+    }
 }

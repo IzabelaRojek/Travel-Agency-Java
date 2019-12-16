@@ -3,9 +3,7 @@ package com.kodilla.travelagency.service;
 import com.kodilla.travelagency.domain.Trip;
 import com.kodilla.travelagency.domain.TripType;
 import com.kodilla.travelagency.repository.TripRepository;
-import com.sun.javafx.scene.control.skin.TableCellSkin;
 import org.junit.Test;
-import org.junit.jupiter.api.TestTemplate;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -18,7 +16,8 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
