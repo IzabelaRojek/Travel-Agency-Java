@@ -29,13 +29,23 @@ public class ReservationController {
         return reservationMapper.mapToReservationDtoList(reservationService.getAllReservations());
     }
 
-    @GetMapping(value = "{reservationId}")
-    public ReservationDto getReservationByNumber(@PathVariable Long reservationId) throws NotFoundException {
-        return reservationMapper.mapToReservationDto(reservationService.getReservation(reservationId).orElseThrow(NotFoundException::new));
+    @GetMapping(value = "{id}")
+    public ReservationDto getReservationById(@PathVariable Long id) throws NotFoundException {
+        return reservationMapper.mapToReservationDto(reservationService.getReservation(id).orElseThrow(NotFoundException::new));
     }
 
     @PostMapping(value = "", consumes = APPLICATION_JSON_VALUE)
     public void addReservation(@RequestBody ReservationDto reservationDto) {
         reservationService.saveReservation(reservationMapper.mapToReservation(reservationDto));
+    }
+
+    @PutMapping(value = "", consumes = APPLICATION_JSON_VALUE)
+    public ReservationDto updateReservation(@RequestBody ReservationDto reservationDto) {
+        return reservationMapper.mapToReservationDto(reservationService.saveReservation(reservationMapper.mapToReservation(reservationDto)));
+    }
+
+    @DeleteMapping("{id}/delete")
+    public void deleteReservation(@PathVariable Long id) {
+        reservationService.deleteReservation(id);
     }
 }

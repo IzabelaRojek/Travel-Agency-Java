@@ -21,8 +21,8 @@ public class ReservationMapper {
 
     public List<ReservationDto> mapToReservationDtoList(final List<Reservation> reservations) {
         return reservations.stream()
-                //.map(r -> new ReservationDto(r.getId(), r.getUser().getId(), r.getTrip().getId(), r.isConfirmed()))
-                .map(r -> mapToReservationDto(r))
+                .map(r -> new ReservationDto(r.getId(), r.getUser().getId(), r.getTrip().getId(), r.isConfirmed()))
+                //.map(r -> mapToReservationDto(r))
                 .collect(Collectors.toList());
     }
 
