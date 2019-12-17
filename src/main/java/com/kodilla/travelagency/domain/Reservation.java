@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -30,4 +31,10 @@ public class Reservation {
 
     @Column(name = "CONFIRMED")
     private boolean isConfirmed;
+
+    @Override
+    public String toString() {
+        return '\n' + "Reservation for: " + user.getFirstname() + " " + user.getLastname() + ", email: " + user.getEmail() +
+                + '\n' + ", trip: " + trip.getName() + " start: " +  trip.getStartDate();
+    }
 }

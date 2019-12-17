@@ -1,9 +1,11 @@
 package com.kodilla.travelagency.service;
 
+import com.kodilla.travelagency.config.AdminConfig;
 import com.kodilla.travelagency.domain.Trip;
 import com.kodilla.travelagency.domain.TripType;
-import com.kodilla.travelagency.domain.dto.TripDto;
+import com.kodilla.travelagency.domain.mail.Mail;
 import com.kodilla.travelagency.repository.TripRepository;
+import com.kodilla.travelagency.service.mail.SimpleEmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,8 +18,16 @@ import java.util.stream.Collectors;
 @Service
 public class TripService {
 
+    private static final String SUBJECT_NEW_TRIP = "New Trip added.";
+
     @Autowired
     private TripRepository tripRepository;
+
+    @Autowired
+    private SimpleEmailService mailService;
+
+    @Autowired
+    private AdminConfig adminConfig;
 
     public List<Trip> getAllTrips(){
         return tripRepository.findAll();
@@ -57,5 +67,9 @@ public class TripService {
 
     public void deleteTrip(Long id) {
         tripRepository.deleteById(id);
+    }
+
+    public void sendNewTripEmail(final Trip trip) {
+        mailService.send(new Mail(adminConfig.getAdminMail(), SUBJECT_NEW_TRIP, "New trip: " + '\n' + "   " +  trip.getName() + '\n' +"has been added." ));
     }
 }

@@ -37,6 +37,7 @@ public class ReservationController {
     @PostMapping(value = "", consumes = APPLICATION_JSON_VALUE)
     public void addReservation(@RequestBody ReservationDto reservationDto) {
         reservationService.saveReservation(reservationMapper.mapToReservation(reservationDto));
+        reservationService.sendNewReservationEmail(reservationMapper.mapToReservation(reservationDto));
     }
 
     @PutMapping(value = "", consumes = APPLICATION_JSON_VALUE)

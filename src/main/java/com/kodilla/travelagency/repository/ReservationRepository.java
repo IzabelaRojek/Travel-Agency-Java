@@ -25,8 +25,13 @@ public interface ReservationRepository extends CrudRepository<Reservation, Long>
     @Override
     void deleteById(Long id);
 
+    @Override
+    long count();
+
     Optional<Reservation> findByUser(User user);
 
     Optional<Reservation> findByUser_Id(Long id);
+
+
 
 }

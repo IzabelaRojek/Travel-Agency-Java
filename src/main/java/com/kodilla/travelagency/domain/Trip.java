@@ -66,4 +66,16 @@ public class Trip {
         this.type = type;
         this.price = price;
     }
+
+    @Override
+    public String toString() {
+        return '\n' +
+                "Trip: " + '\n' +
+                "     name: " + name + '\n' +
+                "     destination: " + destination + '\n' +
+                "     startDate: " + startDate + '\n' +
+                "     stopDate: " + stopDate + '\n' +
+                "     type: " + type + '\n' +
+                "     price: " + price;
+    }
 }

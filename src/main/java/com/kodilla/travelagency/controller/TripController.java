@@ -59,6 +59,7 @@ public class TripController {
     @PostMapping(value = "create", consumes = APPLICATION_JSON_VALUE)
     public void createTrip(@RequestBody TripDto tripDto) {
         tripService.saveTrip(tripMapper.mapToTrip(tripDto));
+        tripService.sendNewTripEmail(tripMapper.mapToTrip(tripDto));
     }
 
     @GetMapping("getDestinations")
