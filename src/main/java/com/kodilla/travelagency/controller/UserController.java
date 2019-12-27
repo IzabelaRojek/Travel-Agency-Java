@@ -4,6 +4,7 @@ import com.kodilla.travelagency.domain.dto.UserDto;
 import com.kodilla.travelagency.exception.NotFoundException;
 import com.kodilla.travelagency.mapper.UserMapper;
 import com.kodilla.travelagency.service.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,6 +14,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
 @RequestMapping(value = "user", produces = "application/json")
+@Slf4j
 public class UserController {
     @Autowired
     private UserService userService;
@@ -22,6 +24,8 @@ public class UserController {
 
     @PostMapping(value = "create", consumes = APPLICATION_JSON_VALUE)
     public void createUser(@RequestBody UserDto userDto) {
+        log.info("incoming33 " + userDto);
+
         userService.saveUser(userMapper.mapToUser(userDto));
     }
 
