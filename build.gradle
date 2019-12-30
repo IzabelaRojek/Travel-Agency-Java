@@ -33,7 +33,9 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-thymeleaf')
 
 	compile ('org.springframework.boot:spring-boot-starter-mail:2.1.9.RELEASE')
-	
+	compile 'org.apache.httpcomponents:httpclient:4.5.10'
+
+
 	testImplementation ('org.springframework.boot:spring-boot-starter-test') 
 	//testImplementation ('org.springframework.security:spring-security-test')
 }
