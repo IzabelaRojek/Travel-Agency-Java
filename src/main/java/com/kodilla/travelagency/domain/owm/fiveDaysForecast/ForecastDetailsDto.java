@@ -1,4 +1,4 @@
-package com.kodilla.travelagency.domain.owm;
+package com.kodilla.travelagency.domain.owm.fiveDaysForecast;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -13,6 +13,9 @@ import java.util.List;
 @NoArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ForecastDetailsDto {
+
+    @JsonProperty("dt")
+    private String dt;
 
     @JsonProperty("main")
     private MainDetailsDto mainDetails;

@@ -1,6 +1,6 @@
 package com.kodilla.travelagency.openWeatherMap.client;
 
-import com.kodilla.travelagency.domain.owm.ForecastDto;
+import com.kodilla.travelagency.domain.owm.fiveDaysForecast.ForecastDto;
 import com.kodilla.travelagency.openWeatherMap.config.OwmConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -21,7 +21,7 @@ public class OwmClient {
 
     public ForecastDto getForecast(String cityName, String countryCode) {
 
-       URI url = UriComponentsBuilder.fromHttpUrl(owmConfig.getOwmApiEndpoint())
+       URI url = UriComponentsBuilder.fromHttpUrl(owmConfig.getOwmApiEndpoint() + "/forecast")
                .queryParam("q", cityName + "," + countryCode)
                .queryParam("units", "metric")
                .queryParam("APPID", owmConfig.getOwmAppKey()).build().encode().toUri();

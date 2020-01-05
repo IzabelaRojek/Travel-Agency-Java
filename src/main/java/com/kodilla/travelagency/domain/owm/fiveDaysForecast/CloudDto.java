@@ -1,4 +1,4 @@
-package com.kodilla.travelagency.domain.owm;
+package com.kodilla.travelagency.domain.owm.fiveDaysForecast;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -10,15 +10,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class WeatherDto {
+public class CloudDto {
 
-    @JsonProperty("id")
-    private long id;
-
-    @JsonProperty("main")
-    private String main;
-
-    @JsonProperty("description")
-    private String description;
-
+    @JsonProperty("all")
+    private double cloudiness;
 }
