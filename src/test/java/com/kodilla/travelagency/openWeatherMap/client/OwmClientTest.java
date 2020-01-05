@@ -1,7 +1,7 @@
 package com.kodilla.travelagency.openWeatherMap.client;
 
-import com.kodilla.travelagency.domain.owm.CityDto;
-import com.kodilla.travelagency.domain.owm.ForecastDto;
+import com.kodilla.travelagency.domain.owm.fiveDaysForecast.CityDto;
+import com.kodilla.travelagency.domain.owm.fiveDaysForecast.ForecastDto;
 import com.kodilla.travelagency.openWeatherMap.config.OwmConfig;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -52,5 +52,4 @@ public class OwmClientTest {
         assertEquals("testCountryCode", forecastResponse.getCity().getCountryCode());
         assertEquals(new ArrayList<>(), forecastResponse.getList());
     }
-
 }

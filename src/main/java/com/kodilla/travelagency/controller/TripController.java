@@ -1,9 +1,11 @@
 package com.kodilla.travelagency.controller;
 
+import com.kodilla.travelagency.domain.Log;
 import com.kodilla.travelagency.domain.TripType;
 import com.kodilla.travelagency.domain.dto.TripDto;
 import com.kodilla.travelagency.exception.NotFoundException;
 import com.kodilla.travelagency.mapper.TripMapper;
+import com.kodilla.travelagency.service.LogService;
 import com.kodilla.travelagency.service.TripService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,8 +28,14 @@ public class TripController {
     @Autowired
     private TripMapper tripMapper;
 
+    @Autowired
+    private LogService logService;
+
     @GetMapping("getAll")
     public List<TripDto> getTrips() {
+        Log logOperation = new Log();
+        logOperation.setOperation("User is displaying trips");
+        logService.saveLog(logOperation);
         return tripMapper.mapToTripDtoList(tripService.getAllTrips());
     }
 

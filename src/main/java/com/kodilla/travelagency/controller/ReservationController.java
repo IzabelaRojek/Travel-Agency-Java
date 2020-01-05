@@ -1,8 +1,11 @@
 package com.kodilla.travelagency.controller;
 
+import com.kodilla.travelagency.domain.Log;
 import com.kodilla.travelagency.domain.dto.ReservationDto;
+import com.kodilla.travelagency.domain.dto.ReservationDtoForView;
 import com.kodilla.travelagency.exception.NotFoundException;
 import com.kodilla.travelagency.mapper.ReservationMapper;
+import com.kodilla.travelagency.service.LogService;
 import com.kodilla.travelagency.service.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,10 +26,16 @@ public class ReservationController {
     @Autowired
     private ReservationMapper reservationMapper;
 
+    @Autowired
+    private LogService logService;
+
 
     @GetMapping(value = "getAll")
-    public List<ReservationDto> getReservations() {
-        return reservationMapper.mapToReservationDtoList(reservationService.getAllReservations());
+    public List<ReservationDtoForView> getReservations() {
+        Log logOperation = new Log();
+        logOperation.setOperation("User is displaying reservations");
+        logService.saveLog(logOperation);
+        return reservationMapper.mapToReservationDtoForViewList(reservationService.getAllReservations());
     }
 
     @GetMapping(value = "{id}")
@@ -40,7 +49,7 @@ public class ReservationController {
         reservationService.sendNewReservationEmail(reservationMapper.mapToReservation(reservationDto));
     }
 
-    @PutMapping(value = "", consumes = APPLICATION_JSON_VALUE)
+    @PutMapping(value = "update", consumes = APPLICATION_JSON_VALUE)
     public ReservationDto updateReservation(@RequestBody ReservationDto reservationDto) {
         return reservationMapper.mapToReservationDto(reservationService.saveReservation(reservationMapper.mapToReservation(reservationDto)));
     }
