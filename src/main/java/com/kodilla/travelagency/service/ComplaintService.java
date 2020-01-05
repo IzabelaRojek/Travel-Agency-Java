@@ -8,6 +8,8 @@ import com.kodilla.travelagency.service.mail.SimpleEmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ComplaintService {
 
@@ -27,5 +29,9 @@ public class ComplaintService {
 
     public void sendComplaint(final Complaint complaint) {
         mailService.send(new Mail(adminConfig.getAdminMail(), SUBJECT + complaint.getTopic(), "Complaint: " + '\n' + "   " + complaint.getContent()));
+    }
+
+    public List<Complaint> getAllComplaints() {
+        return complaintRepository.findAll();
     }
 }
