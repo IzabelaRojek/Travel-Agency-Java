@@ -3,6 +3,7 @@ package com.kodilla.travelagency.controller;
 import com.kodilla.travelagency.domain.User;
 import com.kodilla.travelagency.domain.dto.UserDto;
 import com.kodilla.travelagency.mapper.UserMapper;
+import com.kodilla.travelagency.service.LogService;
 import com.kodilla.travelagency.service.UserService;
 import com.google.gson.Gson;
 import org.junit.Test;
@@ -37,6 +38,9 @@ public class UserControllerTest {
 
     @MockBean
     UserService userService;
+
+    @MockBean
+    LogService logService;
 
     @Test
     public void shouldGetEmptyListOfUsers() throws Exception {

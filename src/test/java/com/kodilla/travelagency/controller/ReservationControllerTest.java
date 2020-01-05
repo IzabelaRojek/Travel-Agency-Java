@@ -6,11 +6,13 @@ import com.kodilla.travelagency.domain.Trip;
 import com.kodilla.travelagency.domain.TripType;
 import com.kodilla.travelagency.domain.User;
 import com.kodilla.travelagency.domain.dto.ReservationDto;
+import com.kodilla.travelagency.domain.dto.ReservationDtoForView;
 import com.kodilla.travelagency.domain.dto.TripDto;
 import com.kodilla.travelagency.domain.dto.UserDto;
 import com.kodilla.travelagency.mapper.ReservationMapper;
 import com.kodilla.travelagency.repository.TripRepository;
 import com.kodilla.travelagency.repository.UserRepository;
+import com.kodilla.travelagency.service.LogService;
 import com.kodilla.travelagency.service.ReservationService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -51,6 +53,9 @@ public class ReservationControllerTest {
     private ReservationService reservationService;
 
     @MockBean
+    private LogService logService;
+
+    @MockBean
     private UserRepository userRepository;
 
     @MockBean
@@ -59,16 +64,15 @@ public class ReservationControllerTest {
     @Test
     public void shouldGetEmptyListOfReservations() throws Exception {
         //Given
-        List<ReservationDto> reservationDtoList = new ArrayList<>();
+        List<ReservationDtoForView> reservationDtoList = new ArrayList<>();
         List<Reservation> reservations = new ArrayList<>();
-        when(reservationMapper.mapToReservationDtoList(reservations)).thenReturn(reservationDtoList);
+        when(reservationMapper.mapToReservationDtoForViewList(reservations)).thenReturn(reservationDtoList);
         when(reservationService.getAllReservations()).thenReturn(reservations);
 
         //When & Then
         mockMvc.perform(get("/reservation/getAll").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(0)));
-
     }
 
 
@@ -88,14 +92,21 @@ public class ReservationControllerTest {
         UserDto userDto = new UserDto(1L, "fn1test", "ln1test", "login1Test", "password1Test", "user1@test");
         TripDto tripDto1 = new TripDto(1L, "trip1name", "destination1", "desc1", LocalDate.of(2019, 12, 11), LocalDate.of(2019, 12, 18), TripType.PLANE, new BigDecimal(3500));
         TripDto tripDto2 = new TripDto(2L, "trip2name", "destination2", "desc2", LocalDate.of(2020, 01, 10), LocalDate.of(2020, 01, 17), TripType.PLANE, new BigDecimal(3500));
-        ReservationDto reservationDto1 = new ReservationDto(1L, userDto.getId(), tripDto1.getId(), false);
-        ReservationDto reservationDto2 = new ReservationDto(2L, userDto.getId(), tripDto2.getId(), false);
+        //ReservationDto reservationDto1 = new ReservationDto(1L, userDto.getId(), tripDto1.getId(), false);
+        //ReservationDto reservationDto2 = new ReservationDto(2L, userDto.getId(), tripDto2.getId(), false);
 
-        List<ReservationDto> reservationDtoList = new ArrayList<>();
-        reservationDtoList.add(reservationDto1);
-        reservationDtoList.add(reservationDto2);
+        ReservationDtoForView reservationDtoForView1 = new ReservationDtoForView(1L, userDto.getFirstname(), userDto.getLastname(), userDto.getLogin(), tripDto1.getName(), tripDto1.getDestination(), tripDto1.getStartDate(), tripDto1.getStopDate(), tripDto1.getType(), tripDto1.getPrice(), false);
+        ReservationDtoForView reservationDtoForView2 = new ReservationDtoForView(2L, userDto.getFirstname(), userDto.getLastname(), userDto.getLogin(), tripDto2.getName(), tripDto2.getDestination(), tripDto2.getStartDate(), tripDto2.getStopDate(), tripDto2.getType(), tripDto2.getPrice(), false);
 
-        when(reservationMapper.mapToReservationDtoList(reservations)).thenReturn(reservationDtoList);
+        //List<ReservationDto> reservationDtoList = new ArrayList<>();
+        //reservationDtoList.add(reservationDto1);
+        //reservationDtoList.add(reservationDto2);
+
+        List<ReservationDtoForView> reservationDtoForViewList = new ArrayList<>();
+        reservationDtoForViewList.add(reservationDtoForView1);
+        reservationDtoForViewList.add(reservationDtoForView2);
+
+        when(reservationMapper.mapToReservationDtoForViewList(reservations)).thenReturn(reservationDtoForViewList);
         when(reservationService.getAllReservations()).thenReturn(reservations);
 
         //When & Then
@@ -169,7 +180,7 @@ public class ReservationControllerTest {
         String jsonContent = gson.toJson(reservationDto1);
 
         //When & Then
-        mockMvc.perform(put("/reservation/").contentType(MediaType.APPLICATION_JSON)
+        mockMvc.perform(put("/reservation/update").contentType(MediaType.APPLICATION_JSON)
                 .characterEncoding("UTF-8")
                 .content(jsonContent))
                 .andExpect(status().isOk());

@@ -5,6 +5,7 @@ import com.kodilla.travelagency.domain.Trip;
 import com.kodilla.travelagency.domain.TripType;
 import com.kodilla.travelagency.domain.dto.TripDto;
 import com.kodilla.travelagency.mapper.TripMapper;
+import com.kodilla.travelagency.service.LogService;
 import com.kodilla.travelagency.service.TripService;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -41,6 +42,9 @@ public class TripControllerTest {
 
     @MockBean
     private TripService tripService;
+
+    @MockBean
+    private LogService logService;
 
     @Test
     public void shouldGetEmptyListOfTrips() throws Exception {

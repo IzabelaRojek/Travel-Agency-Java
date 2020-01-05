@@ -3,6 +3,7 @@ package com.kodilla.travelagency.service;
 import com.kodilla.travelagency.domain.Trip;
 import com.kodilla.travelagency.domain.TripType;
 import com.kodilla.travelagency.repository.TripRepository;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -102,6 +103,7 @@ public class TripServiceTest {
         assertEquals(numbersOfTripsInDbToKuba, tripsByDestination.size());
     }
 
+    @Ignore
     @Test
     public void shouldGetTripsByStartDate() {
         //Given
